@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar — Nikahin</title>
+  <link rel="stylesheet" href="./src/css/auth.css">
+</head>
+<body>
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <h1>Nikahin</h1>
+      <p class="sub">Buat akun, lalu buat halaman undanganmu sendiri</p>
+      <form id="registerForm">
+        <label>Email
+          <input type="email" id="email" placeholder="nama@email.com" required autocomplete="email">
+        </label>
+        <label>Kata sandi <span style="font-size:12px">(min. 6 karakter)</span>
+          <input type="password" id="password" placeholder="••••••••" required autocomplete="new-password">
+        </label>
+        <label>Ulangi kata sandi
+          <input type="password" id="confirm" placeholder="••••••••" required autocomplete="new-password">
+        </label>
+        <p class="err" id="err"></p>
+        <button type="submit">Daftar</button>
+      </form>
+      <p class="swap">Sudah punya akun? <a href="./login.html">Masuk di sini</a></p>
+      <p class="swap"><a href="./index.html">← Kembali ke undangan</a></p>
+    </div>
+  </div>
+  <script type="module" src="./src/js/auth-ui.js"></script>
+</body>
+</html>
