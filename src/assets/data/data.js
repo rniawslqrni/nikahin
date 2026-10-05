@@ -28,7 +28,7 @@ export let invitationId = null;
 // ID undangan yang sedang dibuka (diisi initData). Dipakai comentarService
 // agar ucapan tersimpan/terbaca per undangan (per user).
 
-function resolveSlug() {
+export function resolveSlug() {
     const q = new URLSearchParams(window.location.search).get("u");
     if (q) return q.trim();
     const m = window.location.pathname.match(/^\/u\/([\w-]+)/);

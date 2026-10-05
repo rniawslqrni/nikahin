@@ -193,3 +193,94 @@ table.data th { color: var(--muted); font-weight: normal; font-size: 12px; text-
 }
 .wish-date { display: block; font-size: 11px; color: var(--muted); margin-top: 2px; }
 .wish-del { width: auto !important; padding: 8px 14px !important; font-size: 13px !important; margin: 0 !important; }
+
+/* ---- tab masuk/daftar ---- */
+.auth-tabs {
+  display: flex;
+  background: #f4ede4;
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 20px;
+}
+.auth-tabs button {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 10px;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--muted);
+  border-radius: 9px;
+  cursor: pointer;
+  margin: 0;
+  width: auto;
+}
+.auth-tabs button.active {
+  background: #fff;
+  color: var(--accent-dark);
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* ---- dashboard profesional ---- */
+.dash-topbar {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 12px 18px;
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  margin: 0 -18px 18px;
+}
+.dash-brand { font-size: 18px; color: var(--accent-dark); white-space: nowrap; }
+.dash-brand span { font-size: 12px; color: var(--muted); font-weight: normal; }
+.dash-topbar .actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.dash-topbar .btn, .dash-topbar a.btn { width: auto; padding: 8px 14px; font-size: 13px; margin: 0; }
+.dash-head { margin-bottom: 20px; }
+.dash-head h1 { font-size: 26px; color: var(--accent-dark); margin: 0 0 6px; }
+.dash-head p { color: var(--muted); font-size: 14px; margin: 0; }
+.step {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  font-size: 14px; margin-right: 10px; vertical-align: middle;
+}
+.card h2 { display: flex; align-items: center; }
+
+/* theme picker */
+.theme-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+}
+@media (max-width: 640px) { .theme-grid { grid-template-columns: repeat(2, 1fr); } }
+.theme-card {
+  border: 2px solid var(--line); border-radius: 12px;
+  background: #fff; padding: 12px 8px; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  font-family: inherit; width: 100%; margin: 0;
+}
+.theme-card b { font-size: 13px; color: var(--ink); font-weight: 600; }
+.theme-card.selected { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(183,110,121,0.25); }
+.theme-swatches { display: flex; gap: 0; border-radius: 8px; overflow: hidden; }
+.theme-swatches span { width: 34px; height: 34px; display: block; }
+.color-row { display: flex; gap: 8px; align-items: center; }
+.color-row input[type="color"] {
+  width: 48px; height: 38px; padding: 2px;
+  border: 1px solid var(--line); border-radius: 8px; cursor: pointer;
+  background: #fff;
+}
+.btn-sm { width: auto !important; padding: 8px 12px !important; font-size: 12px !important; margin: 0 !important; }
+
+/* sticky save bar */
+.savebar {
+  position: sticky; bottom: 0; z-index: 40;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
+  border: 1px solid var(--line); border-radius: 14px;
+  padding: 12px 16px; margin-top: 8px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+}
+.savebar .hint { margin: 0; font-size: 12px; color: var(--muted); }
+.savebar .btn { width: auto; margin: 0; padding: 12px 28px; white-space: nowrap; }
+@media (max-width: 640px) {
+  .savebar { flex-direction: column; }
+  .savebar .btn { width: 100%; }
+}

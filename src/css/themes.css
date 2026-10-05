@@ -1,0 +1,33 @@
+/* Preset tema undangan — dipilih per user lewat dashboard.
+   --theme-accent: tombol & aksen, --theme-accent-ink: teks di atas aksen. */
+:root,
+[data-theme="classic"] {
+  --theme-accent: #1a1a1a;
+  --theme-accent-ink: #ffffff;
+  --bg-color: #f8f9fa;
+}
+[data-theme="rose"] {
+  --theme-accent: #b76e79;
+  --theme-accent-ink: #ffffff;
+  --bg-color: #fdf7f8;
+}
+[data-theme="emerald"] {
+  --theme-accent: #2d6a4f;
+  --theme-accent-ink: #ffffff;
+  --bg-color: #f3faf5;
+}
+[data-theme="ocean"] {
+  --theme-accent: #1d5c99;
+  --theme-accent-ink: #ffffff;
+  --bg-color: #f2f7fd;
+}
+[data-theme="lavender"] {
+  --theme-accent: #7c5cbf;
+  --theme-accent-ink: #ffffff;
+  --bg-color: #f7f4fd;
+}
+[data-theme="gold"] {
+  --theme-accent: #9a7b2d;
+  --theme-accent-ink: #ffffff;
+  --bg-color: #fdf9f0;
+}

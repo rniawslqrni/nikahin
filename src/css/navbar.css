@@ -34,7 +34,7 @@ header nav a {
     gap: 0.1rem;
     width: 4rem;
     height: 3rem;
-    color: #000;
+    color: var(--theme-accent);
 }
 
 header nav a i {
@@ -46,6 +46,6 @@ header nav a span {
 }
 
 header nav a:hover {
-    background-color: #000;
+    background-color: var(--theme-accent);
     color: #fff;
 }

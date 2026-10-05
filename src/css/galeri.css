@@ -97,7 +97,7 @@
 .galeri .container button:nth-of-type(3) {
     padding: 0.5rem 1rem;
     background-color: #fff;
-    border: 1px solid #000;
+    border: 1px solid var(--theme-accent);
     border-radius: 20px;
     margin-top: 1rem;
     transition: var(--transition-small);
@@ -105,7 +105,7 @@
 
 .galeri .container button:nth-of-type(3):hover {
     color: #fff;
-    background-color: #000;
+    background-color: var(--theme-accent);
     cursor: pointer;
 }
 

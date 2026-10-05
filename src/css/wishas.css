@@ -44,7 +44,7 @@
 
 .wishas div:nth-of-type(1) > div figure button {
     padding: 0.4rem 1rem;
-    border: 1px solid #000;
+    border: 1px solid var(--theme-accent);
     background-color: #fff;
     border-radius: 10px;
     cursor: pointer;
@@ -52,8 +52,8 @@
 }
 
 .wishas div:nth-of-type(1) > div figure button:hover {
-    background-color: #000;
-    color: #fff;
+    background-color: var(--theme-accent);
+    color: var(--theme-accent-ink);
 }
 
 .wishas div:nth-of-type(2){
@@ -84,7 +84,7 @@
     width: 100%;
     padding: 0.6rem 1rem;
     border-radius: 5px;
-    border: 1px solid #000;
+    border: 1px solid var(--theme-accent);
 }
 
 .wishas div:nth-of-type(2) > form textarea {
@@ -93,8 +93,8 @@
 
 .wishas div:nth-of-type(2) > form button {
     width: 100%;
-    color: #fff;
-    background-color: #000;
+    color: var(--theme-accent-ink);
+    background-color: var(--theme-accent);
     padding: 0.6rem 0;
     border-radius: 5px;
     margin-top: 1rem;
@@ -166,7 +166,7 @@
 
 .wishas div:nth-of-type(3) .button-grup {
     margin: 1rem auto 0;
-    border: 1px solid #000;
+    border: 1px solid var(--theme-accent);
     border-radius: 4px;
     background-color: #fff;
     width: fit-content;

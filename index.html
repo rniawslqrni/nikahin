@@ -46,6 +46,8 @@
 
     <!-- css -->
     <link rel="stylesheet" href="/src/assets/styles/global.css">
+  <link rel="stylesheet" href="/src/css/themes.css">
+  <link rel="stylesheet" href="/src/css/landing.css">
     <link rel="stylesheet" href="/src/css/navbar.css">
     <link rel="stylesheet" href="/src/css/welcome.css">
     <link rel="stylesheet" href="/src/css/home.css">
@@ -59,7 +61,93 @@
     <title>wedding - invitation</title>
 </head>
 <body>
+<div id="landing">
+  <nav class="lp-nav">
+    <a class="lp-brand" href="./">💒 Nikahin</a>
+    <div class="lp-links">
+      <a href="#lp-fitur">Fitur</a>
+      <a href="#lp-tema">Tema</a>
+      <a href="#lp-cara">Cara Kerja</a>
+    </div>
+    <div class="lp-nav-cta">
+      <a href="./auth.html" class="lp-btn ghost">Masuk</a>
+      <a href="./auth.html?mode=register" class="lp-btn">Buat Gratis</a>
+    </div>
+  </nav>
 
+  <header class="lp-hero">
+    <div class="lp-hero-text">
+      <span class="lp-badge">Undangan Pernikahan Digital</span>
+      <h1>Bagikan Kabar Bahagiamu Lewat <em>Satu Tautan</em></h1>
+      <p>Buat undangan pernikahan digital yang cantik dalam hitungan menit. Pilih tema, pasang musik favoritmu, terima ucapan &amp; doa dari tamu — semua dari satu dashboard yang mudah.</p>
+      <div class="lp-hero-btns">
+        <a href="./auth.html?mode=register" class="lp-btn big">Buat Undangan Gratis</a>
+        <a href="./u/test-testi" class="lp-btn big ghost">Lihat Contoh</a>
+      </div>
+      <p class="lp-note">Gratis · Tanpa kartu kredit · Langsung jadi</p>
+    </div>
+    <div class="lp-hero-visual">
+      <div class="lp-phone">
+        <div class="lp-phone-notch"></div>
+        <div class="lp-phone-screen">
+          <p class="lp-pv-sub">The Wedding Of</p>
+          <h3 class="lp-pv-names">Andi &amp; Wulan</h3>
+          <p class="lp-pv-date">Sabtu, 14 November 2026</p>
+          <span class="lp-pv-btn">Buka Undangan</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="lp-section" id="lp-fitur">
+    <h2>Semua yang Kamu Butuhkan</h2>
+    <p class="lp-sub">Satu platform lengkap untuk undangan digitalmu.</p>
+    <div class="lp-grid">
+      <div class="lp-card"><span class="lp-ico">🎨</span><h3>6 Tema Cantik</h3><p>Pilih tema Klasik, Rose, Emerald, Ocean, Lavender, atau Emas — plus atur warna aksen &amp; latar sesukamu.</p></div>
+      <div class="lp-card"><span class="lp-ico">🎵</span><h3>Musik Latar</h3><p>Pasang lagu favoritmu dari URL YouTube atau file MP3 sebagai musik latar undangan.</p></div>
+      <div class="lp-card"><span class="lp-ico">💬</span><h3>Buku Tamu Digital</h3><p>Tamu bisa menulis ucapan &amp; doa langsung di undanganmu. Kelola semuanya dari dashboard.</p></div>
+      <div class="lp-card"><span class="lp-ico">📸</span><h3>Galeri Foto</h3><p>Abadikan momen prewedding-mu dalam galeri foto yang elegan.</p></div>
+      <div class="lp-card"><span class="lp-ico">💌</span><h3>Amplop Digital</h3><p>Tampilkan nomor rekening untuk tanda kasih dari tamu, lengkap dengan tombol salin.</p></div>
+      <div class="lp-card"><span class="lp-ico">📍</span><h3>Peta &amp; Kalender</h3><p>Tamu mudah menemukan lokasi acara dan menyimpan tanggal ke Google Calendar.</p></div>
+    </div>
+  </section>
+
+  <section class="lp-section lp-alt" id="lp-tema">
+    <h2>Pilih Temamu</h2>
+    <p class="lp-sub">Setiap tema bisa disesuaikan lagi warnanya sesuai seleramu.</p>
+    <div class="lp-themes">
+      <div class="lp-theme"><span style="background:#1a1a1a"></span><b>Klasik</b></div>
+      <div class="lp-theme"><span style="background:#b76e79"></span><b>Rose</b></div>
+      <div class="lp-theme"><span style="background:#2d6a4f"></span><b>Emerald</b></div>
+      <div class="lp-theme"><span style="background:#1d5c99"></span><b>Ocean</b></div>
+      <div class="lp-theme"><span style="background:#7c5cbf"></span><b>Lavender</b></div>
+      <div class="lp-theme"><span style="background:#9a7b2d"></span><b>Emas</b></div>
+    </div>
+  </section>
+
+  <section class="lp-section" id="lp-cara">
+    <h2>Cara Kerja</h2>
+    <p class="lp-sub">Tiga langkah mudah menuju undangan digitalmu.</p>
+    <div class="lp-steps">
+      <div class="lp-step"><span>1</span><h3>Daftar Akun</h3><p>Buat akun gratis dalam hitungan detik.</p></div>
+      <div class="lp-step"><span>2</span><h3>Isi &amp; Hias</h3><p>Lengkapi data mempelai, pilih tema, pasang musik &amp; foto.</p></div>
+      <div class="lp-step"><span>3</span><h3>Bagikan Tautan</h3><p>Sebarkan tautan undanganmu ke semua tamu.</p></div>
+    </div>
+  </section>
+
+  <section class="lp-cta">
+    <h2>Siap Membuat Undanganmu?</h2>
+    <p>Bergabunglah dan buat undangan pernikahan digital pertamamu hari ini.</p>
+    <a href="./auth.html?mode=register" class="lp-btn big light">Buat Gratis Sekarang</a>
+  </section>
+
+  <footer class="lp-footer">
+    <p>© 2026 <b>Nikahin</b> — Platform Undangan Pernikahan Digital</p>
+  </footer>
+</div>
+
+
+<div id="invitation">
 <header>
     <nav role="navigation" aria-label="main bavigation"></nav>
 </header>
@@ -256,6 +344,8 @@
         </a>
     </div>
 </footer>
+
+</div>
 
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script src="/src/main.js" type="module"></script>

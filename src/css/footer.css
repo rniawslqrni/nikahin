@@ -23,7 +23,7 @@ footer > div {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid #000;
+    border-top: 1px solid var(--theme-accent);
     margin-top: 1rem;
     padding-top: 0.6rem;
 }
@@ -40,6 +40,6 @@ footer > div a {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #000;
+    color: var(--theme-accent);
     font-size: 0.8rem;
 }

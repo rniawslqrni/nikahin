@@ -8,16 +8,18 @@
 </head>
 <body>
   <div class="page">
-    <div class="topbar">
-      <div>
-        <h1>Dashboard</h1>
-        <div class="who" id="who">Memuat…</div>
-      </div>
+    <header class="dash-topbar">
+      <div class="dash-brand">💒 <b>Nikahin</b> <span>Studio</span></div>
       <div class="actions">
+        <span class="who" id="who">Memuat…</span>
         <a class="btn secondary" id="viewLink" href="#" target="_blank" style="display:none">Lihat Undangan</a>
         <a class="btn secondary" id="adminLink" href="./admin.html" style="display:none">Admin</a>
         <button class="btn secondary" id="logoutBtn" type="button">Keluar</button>
       </div>
+    </header>
+    <div class="dash-head">
+      <h1>Dashboard Undangan</h1>
+      <p>Kelola undangan pernikahan digitalmu — isi data, pilih tema, atur musik, lalu bagikan tautannya.</p>
     </div>
 
     <p class="err" id="err"></p>
@@ -25,7 +27,7 @@
 
     <form id="invForm" style="display:none">
       <div class="card">
-        <h2>Tautan Undangan</h2>
+        <h2><span class="step">1</span>Tautan Undangan</h2>
         <p class="desc">Tautan publik halaman undanganmu. Contoh: <b>nikahin.vercel.app/u/andi-wulan</b></p>
         <div class="field">
           <label>Slug (nama unik di URL)</label>
@@ -38,8 +40,45 @@
         <label class="checkline"><input type="checkbox" id="isPublished" checked> Tampilkan ke publik</label>
       </div>
 
+
       <div class="card">
-        <h2>Mempelai</h2>
+        <h2><span class="step">✦</span>Tema Undangan</h2>
+        <p class="desc">Pilih tampilan undanganmu. Kamu juga bisa mengatur warna aksen & latar sendiri.</p>
+        <div class="theme-grid" id="themeGrid"></div>
+        <input type="hidden" name="theme.preset" id="themePreset" value="classic">
+        <input type="hidden" name="theme.accent" id="themeAccentVal" value="">
+        <input type="hidden" name="theme.bg" id="themeBgVal" value="">
+        <div class="grid2" style="margin-top:14px">
+          <div class="field">
+            <label>Warna aksen kustom</label>
+            <div class="color-row">
+              <input type="color" id="themeAccentPick" value="#1a1a1a">
+              <button type="button" class="btn secondary btn-sm" id="themeAccentReset">Bawaan tema</button>
+            </div>
+          </div>
+          <div class="field">
+            <label>Warna latar kustom</label>
+            <div class="color-row">
+              <input type="color" id="themeBgPick" value="#f8f9fa">
+              <button type="button" class="btn secondary btn-sm" id="themeBgReset">Bawaan tema</button>
+            </div>
+          </div>
+        </div>
+        <p class="hint">Warna kustom menimpa warna bawaan tema yang dipilih.</p>
+      </div>
+
+      <div class="card">
+        <h2><span class="step">♪</span>Musik Latar</h2>
+        <p class="desc">Tempel URL YouTube atau file MP3 sebagai musik latar undangan. Kosongkan untuk memakai musik bawaan.</p>
+        <div class="field">
+          <label>URL YouTube / MP3</label>
+          <input type="url" name="audio" id="audioUrl" placeholder="https://www.youtube.com/watch?v=…">
+          <div class="hint">Contoh YouTube: https://www.youtube.com/watch?v=VIDEO_ID</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2><span class="step">2</span>Mempelai</h2>
         <p class="desc">Data kedua mempelai dan orang tua.</p>
         <div class="grid2">
           <div>
@@ -72,7 +111,7 @@
       </div>
 
       <div class="card">
-        <h2>Waktu &amp; Tempat</h2>
+        <h2><span class="step">3</span>Waktu &amp; Tempat</h2>
         <div class="grid2">
           <div>
             <h3 style="margin:0 0 10px;font-size:16px">Akad Nikah</h3>
@@ -127,13 +166,13 @@
       </div>
 
       <div class="card">
-        <h2>Galeri Foto</h2>
+        <h2><span class="step">4</span>Galeri Foto</h2>
         <p class="desc">Maksimal 5 foto. Biarkan kosong untuk memakai foto bawaan.</p>
         <div class="grid3" id="galeriGrid"></div>
       </div>
 
       <div class="card">
-        <h2>Amplop Digital</h2>
+        <h2><span class="step">5</span>Amplop Digital</h2>
         <p class="desc">Nomor rekening untuk tanda kasih tamu.</p>
         <div class="grid2">
           <div>
@@ -148,13 +187,15 @@
       </div>
 
       <div class="card">
-        <h2>Ucapan &amp; Doa</h2>
+        <h2><span class="step">6</span>Ucapan &amp; Doa</h2>
         <p class="desc">Ucapan tamu tersimpan otomatis di database untuk undanganmu. Kamu bisa menghapus ucapan yang tidak pantas.</p>
         <div id="wishesList"><p class="desc">Memuat…</p></div>
       </div>
 
-      <button class="btn" type="submit" id="saveBtn">Simpan Undangan</button>
-      <p class="hint" style="text-align:center;color:var(--muted);font-size:13px">Perubahan langsung tampil di tautan publik setelah disimpan.</p>
+      <div class="savebar">
+        <span class="hint">Perubahan langsung tampil di tautan publik setelah disimpan.</span>
+        <button class="btn" type="submit" id="saveBtn">💾 Simpan Undangan</button>
+      </div>
     </form>
   </div>
   <script type="module" src="./src/js/dashboard.js"></script>

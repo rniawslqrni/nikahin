@@ -89,6 +89,8 @@ export const data = {
 
     audio: '/src/assets/audio/wedding.mp3',
 
+    theme: { preset: 'classic', accent: '', bg: '' },
+
     navbar: [
         {
             id: 1,

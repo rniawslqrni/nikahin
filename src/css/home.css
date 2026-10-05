@@ -38,7 +38,10 @@
     margin: 0 0 0.5rem;
     font-weight: 400;
     font-family: var(--sacramento);
-    font-size: var(--fontSize-heading-lg);
+    font-size: clamp(1.9rem, 7vw, var(--fontSize-heading-lg));
+    line-height: 1.25;
+    padding: 0 1rem;
+    overflow-wrap: break-word;
 }
 
 .home h3 {
@@ -59,7 +62,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #000;
+    border: 1px solid var(--theme-accent);
     border-radius: 8px;
 }
 
@@ -75,9 +78,9 @@
 
 .home a {
     padding: 0.5rem 1rem;
-    color: #fff;
+    color: var(--theme-accent-ink);
     font-size: 1rem;
-    background-color: #000;
+    background-color: var(--theme-accent);
     margin: 1rem auto;
     border-radius: 20px;
     width: fit-content;

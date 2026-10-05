@@ -5,21 +5,32 @@ import {galeri} from "./js/galeri.js";
 import {wishas} from "./js/wishas.js";
 import {navbar} from "./js/navbar.js";
 import {welcome} from "./js/welcome.js";
-import {initData} from "./assets/data/data.js";
+import {initData, resolveSlug} from "./assets/data/data.js";
+import {applyTheme} from "./js/theme.js";
 
 // load content
 document.addEventListener('DOMContentLoaded', async () => {
     AOS.init();
 
-    // Kalau URL membawa ?u=slug (atau /u/slug), muat data undangan milik user dari database.
-    // Tanpa slug, tampil data template bawaan seperti biasa.
-    await initData();
+    const slug = resolveSlug();
+    const landingEl = document.getElementById('landing');
+    const invitationEl = document.getElementById('invitation');
 
-    welcome();
-    navbar();
-    home();
-    bride()
-    time();
-    galeri();
-    wishas();
+    if (slug) {
+        // Mode undangan: sembunyikan landing, tampilkan undangan milik user.
+        if (landingEl) landingEl.style.display = 'none';
+        await initData();
+        applyTheme();
+        welcome();
+        navbar();
+        home();
+        bride()
+        time();
+        galeri();
+        wishas();
+    } else {
+        // Mode landing page platform.
+        if (invitationEl) invitationEl.style.display = 'none';
+        document.body.classList.add('landing-mode');
+    }
 });

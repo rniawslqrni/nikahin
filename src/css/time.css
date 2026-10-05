@@ -28,9 +28,9 @@
 
 .time a {
     padding: 0.5rem 1rem;
-    color: #fff;
+    color: var(--theme-accent-ink);
     font-size: 1rem;
-    background-color: #000;
+    background-color: var(--theme-accent);
     margin: 2rem auto 1rem;
     border-radius: 20px;
     width: fit-content;

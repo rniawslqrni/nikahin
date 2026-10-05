@@ -1,5 +1,6 @@
 import { supabase, isSupabaseConfigured, requireSession, getProfile, signOut } from "../lib/supabase.js";
 import { data as templateData } from "../assets/data/template.js";
+import { THEMES } from "./theme.js";
 
 const errEl = document.getElementById("err");
 const okEl = document.getElementById("ok");
@@ -116,12 +117,47 @@ async function loadWishes() {
     }));
 }
 
+// ---------- Pemilih tema ----------
+function initThemePicker() {
+    const grid = document.getElementById("themeGrid");
+    if (!grid) return;
+    const presetInput = document.getElementById("themePreset");
+    const accentVal = document.getElementById("themeAccentVal");
+    const bgVal = document.getElementById("themeBgVal");
+    const accentPick = document.getElementById("themeAccentPick");
+    const bgPick = document.getElementById("themeBgPick");
+
+    grid.innerHTML = THEMES.map((t) => `
+        <button type="button" class="theme-card" data-id="${t.id}">
+            <span class="theme-swatches">
+                <span style="background:${t.accent}"></span><span style="background:${t.bg}"></span>
+            </span>
+            <b>${t.name}</b>
+        </button>`).join("");
+
+    const sync = () => {
+        const preset = THEMES.find((t) => t.id === presetInput.value) || THEMES[0];
+        grid.querySelectorAll(".theme-card").forEach((c) =>
+            c.classList.toggle("selected", c.dataset.id === preset.id));
+        accentPick.value = accentVal.value || preset.accent;
+        bgPick.value = bgVal.value || preset.bg;
+    };
+
+    grid.querySelectorAll(".theme-card").forEach((card) =>
+        card.addEventListener("click", () => { presetInput.value = card.dataset.id; sync(); }));
+    accentPick.addEventListener("input", () => { accentVal.value = accentPick.value; });
+    bgPick.addEventListener("input", () => { bgVal.value = bgPick.value; });
+    document.getElementById("themeAccentReset").addEventListener("click", () => { accentVal.value = ""; sync(); });
+    document.getElementById("themeBgReset").addEventListener("click", () => { bgVal.value = ""; sync(); });
+    sync();
+}
+
 async function main() {
     if (!isSupabaseConfigured()) {
         return showErr("Supabase belum dikonfigurasi. Isi dulu src/config.js, lalu refresh.");
     }
     const session = await requireSession();
-    if (!session) return window.location.replace("./login.html");
+    if (!session) return window.location.replace("./auth.html");
     const user = session.user;
 
     const profile = await getProfile(user.id);
@@ -153,6 +189,7 @@ async function main() {
     });
     buildGaleriInputs(current);
     fillForm(current);
+    initThemePicker();
     bindFilePreviews();
     form.style.display = "block";
     loadWishes();

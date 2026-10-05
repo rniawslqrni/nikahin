@@ -10,7 +10,7 @@ const fmtDate = (iso) => new Date(iso).toLocaleDateString("id-ID", { day: "numer
 async function main() {
     if (!isSupabaseConfigured()) return showErr("Supabase belum dikonfigurasi. Isi dulu src/config.js.");
     const session = await requireSession();
-    if (!session) return window.location.replace("./login.html");
+    if (!session) return window.location.replace("./auth.html");
 
     const profile = await getProfile(session.user.id);
     if (!profile?.is_admin) {
