@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Nikahin</title>
+  <link rel="stylesheet" href="./src/css/auth.css">
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div>
+        <h1>Admin</h1>
+        <div class="who" id="who">Memuat…</div>
+      </div>
+      <div class="actions">
+        <a class="btn secondary" href="./dashboard.html">Dashboard</a>
+        <button class="btn secondary" id="logoutBtn" type="button">Keluar</button>
+      </div>
+    </div>
+
+    <p class="err" id="err"></p>
+    <p class="ok-msg" id="ok"></p>
+
+    <div class="card" id="usersCard" style="display:none">
+      <h2>Pengguna</h2>
+      <p class="desc">Kelola akun terdaftar. Admin tidak bisa mencabut status admin dirinya sendiri.</p>
+      <div style="overflow-x:auto">
+      <table class="data" id="usersTable">
+        <thead><tr><th>Email</th><th>Terdaftar</th><th>Status</th><th>Aksi</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="card" id="invCard" style="display:none">
+      <h2>Halaman Undangan</h2>
+      <p class="desc">Semua halaman undangan milik user. Nonaktifkan yang melanggar, hapus bila perlu.</p>
+      <div style="overflow-x:auto">
+      <table class="data" id="invTable">
+        <thead><tr><th>Slug</th><th>Pemilik</th><th>Status</th><th>Aksi</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="./src/js/admin.js"></script>
+</body>
+</html>
