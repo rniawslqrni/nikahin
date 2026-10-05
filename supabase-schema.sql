@@ -63,7 +63,10 @@ create policy "invitations_admin_all" on public.invitations for all
 create or replace function public.handle_new_user()
 returns trigger language plpgsql security definer set search_path = public as $$
 begin
-  insert into public.profiles (id, email) values (new.id, new.email)
+  -- user pertama yang daftar otomatis jadi admin
+  insert into public.profiles (id, email, is_admin)
+  values (new.id, new.email,
+          not exists (select 1 from public.profiles where is_admin = true))
   on conflict (id) do nothing;
   return new;
 end; $$;
@@ -109,6 +112,5 @@ create policy "images_owner_delete" on storage.objects for delete
   using (bucket_id = 'invitation-images'
     and (storage.foldername(name))[1] = auth.uid()::text);
 
--- 9. JADIKAN DIRIMU ADMIN — jalankan ini SETELAH kamu daftar akun pertama:
---    (ganti dengan email yang kamu pakai daftar)
--- update public.profiles set is_admin = true where email = 'email-kamu@contoh.com';
+-- 9. Tidak perlu query admin manual: user PERTAMA yang daftar otomatis
+--    menjadi admin (lihat trigger handle_new_user di atas).
