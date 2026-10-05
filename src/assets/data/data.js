@@ -23,6 +23,10 @@ function normalizeAssetPaths(obj) {
 }
 
 export let data = normalizeAssetPaths(templateData);
+export let invitationId = null;
+
+// ID undangan yang sedang dibuka (diisi initData). Dipakai comentarService
+// agar ucapan tersimpan/terbaca per undangan (per user).
 
 function resolveSlug() {
     const q = new URLSearchParams(window.location.search).get("u");
@@ -37,11 +41,14 @@ export async function initData() {
     try {
         const { data: inv, error } = await supabase
             .from("invitations")
-            .select("data")
+            .select("id,data")
             .eq("slug", slug)
             .eq("is_published", true)
             .maybeSingle();
-        if (!error && inv && inv.data) data = normalizeAssetPaths(inv.data);
+        if (!error && inv) {
+            invitationId = inv.id;
+            if (inv.data) data = normalizeAssetPaths(inv.data);
+        }
     } catch (e) {
         console.warn("Gagal memuat data undangan:", e);
     }

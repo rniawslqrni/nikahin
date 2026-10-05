@@ -71,6 +71,51 @@ async function uploadImage(userId, key, file) {
 const sanitizeSlug = (s) =>
     s.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);
 
+const escapeHtml = (s) => String(s ?? "").replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+let invitationDbId = null;
+
+async function loadWishes() {
+    const list = document.getElementById("wishesList");
+    if (!list) return;
+    if (!invitationDbId) {
+        list.innerHTML = '<p class="desc">Simpan undangan dulu, lalu ucapan tamu akan muncul di sini.</p>';
+        return;
+    }
+    const { data: wishes, error } = await supabase
+        .from("wishes")
+        .select("id,name,status,message,created_at")
+        .eq("invitation_id", invitationDbId)
+        .order("created_at", { ascending: false })
+        .limit(100);
+    if (error) {
+        list.innerHTML = '<p class="desc">Gagal memuat ucapan: ' + escapeHtml(error.message) + '</p>';
+        return;
+    }
+    if (!wishes.length) {
+        list.innerHTML = '<p class="desc">Belum ada ucapan masuk.</p>';
+        return;
+    }
+    list.innerHTML = wishes.map((w) => `
+        <div class="wish-row">
+            <div class="wish-body">
+                <b>${escapeHtml(w.name)}</b>
+                <span class="wish-status">${escapeHtml(w.status)}</span>
+                <span class="wish-date">${new Date(w.created_at).toLocaleString("id-ID")}</span>
+                <p>${escapeHtml(w.message)}</p>
+            </div>
+            <button type="button" class="btn danger wish-del" data-id="${w.id}">Hapus</button>
+        </div>`).join("");
+    list.querySelectorAll(".wish-del").forEach((btn) => btn.addEventListener("click", async () => {
+        if (!confirm("Hapus ucapan ini?")) return;
+        btn.disabled = true;
+        const { error: delErr } = await supabase.from("wishes").delete().eq("id", btn.dataset.id);
+        if (delErr) { showErr(delErr.message); btn.disabled = false; return; }
+        loadWishes();
+    }));
+}
+
 async function main() {
     if (!isSupabaseConfigured()) {
         return showErr("Supabase belum dikonfigurasi. Isi dulu src/config.js, lalu refresh.");
@@ -86,11 +131,12 @@ async function main() {
 
     // Muat undangan yang sudah ada (kalau ada)
     const { data: existing } = await supabase
-        .from("invitations").select("slug, data, is_published").eq("user_id", user.id).maybeSingle();
+        .from("invitations").select("id, slug, data, is_published").eq("user_id", user.id).maybeSingle();
 
     let current = structuredClone(templateData);
     if (existing?.data && Object.keys(existing.data).length) current = existing.data;
     if (existing) {
+        invitationDbId = existing.id || null;
         document.getElementById("slug").value = existing.slug;
         document.getElementById("isPublished").checked = existing.is_published;
         const url = `${location.origin}/u/${existing.slug}`;
@@ -109,6 +155,7 @@ async function main() {
     fillForm(current);
     bindFilePreviews();
     form.style.display = "block";
+    loadWishes();
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -147,6 +194,10 @@ async function main() {
             if (error) throw error;
 
             current = invData;
+            const { data: invRow } = await supabase
+                .from("invitations").select("id").eq("user_id", user.id).maybeSingle();
+            invitationDbId = invRow?.id || null;
+            loadWishes();
             const url = `${location.origin}/u/${slug}`;
             document.getElementById("publicUrl").textContent = url;
             document.getElementById("publicUrlRow").style.display = "flex";

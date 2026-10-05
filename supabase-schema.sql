@@ -114,3 +114,33 @@ create policy "images_owner_delete" on storage.objects for delete
 
 -- 9. Tidak perlu query admin manual: user PERTAMA yang daftar otomatis
 --    menjadi admin (lihat trigger handle_new_user di atas).
+
+-- 10. Ucapan & doa per undangan (per user)
+create table if not exists public.wishes (
+  id bigint generated always as identity primary key,
+  invitation_id uuid not null references public.invitations(id) on delete cascade,
+  name text not null check (char_length(name) between 1 and 60),
+  status text not null default 'Hadir' check (status in ('Hadir', 'Tidak Hadir')),
+  message text not null check (char_length(message) between 1 and 500),
+  color text not null default '#b76e79',
+  created_at timestamptz not null default now()
+);
+create index if not exists wishes_invitation_created_idx
+  on public.wishes (invitation_id, created_at);
+alter table public.wishes enable row level security;
+
+drop policy if exists "wishes_public_read" on public.wishes;
+create policy "wishes_public_read" on public.wishes for select
+  using (exists (select 1 from public.invitations i
+                 where i.id = wishes.invitation_id and i.is_published = true));
+
+drop policy if exists "wishes_public_insert" on public.wishes;
+create policy "wishes_public_insert" on public.wishes for insert
+  with check (exists (select 1 from public.invitations i
+                      where i.id = wishes.invitation_id and i.is_published = true));
+
+drop policy if exists "wishes_owner_delete" on public.wishes;
+create policy "wishes_owner_delete" on public.wishes for delete
+  using (exists (select 1 from public.invitations i
+                 where i.id = wishes.invitation_id
+                   and (i.user_id = auth.uid() or public.is_admin())));
