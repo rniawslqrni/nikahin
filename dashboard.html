@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Nikahin</title>
+  <link rel="stylesheet" href="./src/css/auth.css">
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div>
+        <h1>Dashboard</h1>
+        <div class="who" id="who">Memuat…</div>
+      </div>
+      <div class="actions">
+        <a class="btn secondary" id="viewLink" href="#" target="_blank" style="display:none">Lihat Undangan</a>
+        <a class="btn secondary" id="adminLink" href="./admin.html" style="display:none">Admin</a>
+        <button class="btn secondary" id="logoutBtn" type="button">Keluar</button>
+      </div>
+    </div>
+
+    <p class="err" id="err"></p>
+    <p class="ok-msg" id="ok"></p>
+
+    <form id="invForm" style="display:none">
+      <div class="card">
+        <h2>Tautan Undangan</h2>
+        <p class="desc">Tautan publik halaman undanganmu. Contoh: <b>nikahin.vercel.app/u/andi-wulan</b></p>
+        <div class="field">
+          <label>Slug (nama unik di URL)</label>
+          <input type="text" name="__slug" id="slug" placeholder="andi-wulan" required>
+          <div class="hint">Huruf kecil, angka, dan strip (-) saja.</div>
+        </div>
+        <div class="slug-row" id="publicUrlRow" style="display:none">
+          <span>Tautanmu:</span><code id="publicUrl"></code>
+        </div>
+        <label class="checkline"><input type="checkbox" id="isPublished" checked> Tampilkan ke publik</label>
+      </div>
+
+      <div class="card">
+        <h2>Mempelai</h2>
+        <p class="desc">Data kedua mempelai dan orang tua.</p>
+        <div class="grid2">
+          <div>
+            <h3 style="margin:0 0 10px;font-size:16px">Mempelai Pria</h3>
+            <div class="field"><label>Nama lengkap</label><input type="text" name="bride.L.name"></div>
+            <div class="field"><label>Putra ke-</label><input type="text" name="bride.L.child" placeholder="Putra pertama"></div>
+            <div class="field"><label>Nama ayah</label><input type="text" name="bride.L.father"></div>
+            <div class="field"><label>Nama ibu</label><input type="text" name="bride.L.mother"></div>
+            <div class="field"><label>Foto</label>
+              <input type="file" accept="image/*" data-upload="bride.L.image" data-key="pria" data-preview="prevL">
+              <img class="preview-img" id="prevL" style="display:none" alt="">
+            </div>
+          </div>
+          <div>
+            <h3 style="margin:0 0 10px;font-size:16px">Mempelai Wanita</h3>
+            <div class="field"><label>Nama lengkap</label><input type="text" name="bride.P.name"></div>
+            <div class="field"><label>Putri ke-</label><input type="text" name="bride.P.child" placeholder="Putri kedua"></div>
+            <div class="field"><label>Nama ayah</label><input type="text" name="bride.P.father"></div>
+            <div class="field"><label>Nama ibu</label><input type="text" name="bride.P.mother"></div>
+            <div class="field"><label>Foto</label>
+              <input type="file" accept="image/*" data-upload="bride.P.image" data-key="wanita" data-preview="prevP">
+              <img class="preview-img" id="prevP" style="display:none" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="field" style="margin-top:12px"><label>Foto couple (halaman utama)</label>
+          <input type="file" accept="image/*" data-upload="bride.couple" data-key="couple" data-preview="prevCouple">
+          <img class="preview-img" id="prevCouple" style="display:none" alt="">
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Waktu &amp; Tempat</h2>
+        <div class="grid2">
+          <div>
+            <h3 style="margin:0 0 10px;font-size:16px">Akad Nikah</h3>
+            <div class="grid2">
+              <div class="field"><label>Hari</label><input type="text" name="time.marriage.day" placeholder="Sabtu"></div>
+              <div class="field"><label>Tanggal</label><input type="text" name="time.marriage.date" placeholder="14"></div>
+            </div>
+            <div class="grid2">
+              <div class="field"><label>Bulan</label>
+                <select name="time.marriage.month">
+                  <option>Januari</option><option>Februari</option><option>Maret</option><option>April</option>
+                  <option>Mei</option><option>Juni</option><option>Juli</option><option>Agustus</option>
+                  <option>September</option><option>Oktober</option><option>November</option><option>Desember</option>
+                </select>
+              </div>
+              <div class="field"><label>Tahun</label><input type="text" name="time.marriage.year" placeholder="2027"></div>
+            </div>
+            <div class="grid2">
+              <div class="field"><label>Jam mulai</label><input type="text" name="time.marriage.hours.start" placeholder="08.00"></div>
+              <div class="field"><label>Jam selesai</label><input type="text" name="time.marriage.hours.finish" placeholder="Selesai"></div>
+            </div>
+          </div>
+          <div>
+            <h3 style="margin:0 0 10px;font-size:16px">Resepsi</h3>
+            <div class="grid2">
+              <div class="field"><label>Hari</label><input type="text" name="time.reception.day" placeholder="Sabtu"></div>
+              <div class="field"><label>Tanggal</label><input type="text" name="time.reception.date" placeholder="14"></div>
+            </div>
+            <div class="grid2">
+              <div class="field"><label>Bulan</label>
+                <select name="time.reception.month">
+                  <option>Januari</option><option>Februari</option><option>Maret</option><option>April</option>
+                  <option>Mei</option><option>Juni</option><option>Juli</option><option>Agustus</option>
+                  <option>September</option><option>Oktober</option><option>November</option><option>Desember</option>
+                </select>
+              </div>
+              <div class="field"><label>Tahun</label><input type="text" name="time.reception.year" placeholder="2027"></div>
+            </div>
+            <div class="grid2">
+              <div class="field"><label>Jam mulai</label><input type="text" name="time.reception.hours.start" placeholder="11.00"></div>
+              <div class="field"><label>Jam selesai</label><input type="text" name="time.reception.hours.finish" placeholder="Selesai"></div>
+            </div>
+          </div>
+        </div>
+        <div class="field"><label>Alamat acara</label>
+          <textarea name="time.address" rows="2" placeholder="Nama gedung / alamat lengkap"></textarea>
+        </div>
+        <div class="grid2">
+          <div class="field"><label>Link Google Maps</label><input type="url" name="link.map" placeholder="https://maps.app.goo.gl/…"></div>
+          <div class="field"><label>Link Google Calendar</label><input type="url" name="link.calendar" placeholder="https://calendar.app.google/…"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Galeri Foto</h2>
+        <p class="desc">Maksimal 5 foto. Biarkan kosong untuk memakai foto bawaan.</p>
+        <div class="grid3" id="galeriGrid"></div>
+      </div>
+
+      <div class="card">
+        <h2>Amplop Digital</h2>
+        <p class="desc">Nomor rekening untuk tanda kasih tamu.</p>
+        <div class="grid2">
+          <div>
+            <div class="field"><label>Bank 1 — atas nama</label><input type="text" name="bank.0.name"></div>
+            <div class="field"><label>Bank 1 — nomor rekening</label><input type="text" name="bank.0.rekening"></div>
+          </div>
+          <div>
+            <div class="field"><label>Bank 2 — atas nama</label><input type="text" name="bank.1.name"></div>
+            <div class="field"><label>Bank 2 — nomor rekening</label><input type="text" name="bank.1.rekening"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Buku Tamu</h2>
+        <p class="desc">Tempel URL Web App Google Apps Script (lihat panduan di README repo template) agar ucapan tamu tersimpan. Boleh dikosongkan.</p>
+        <div class="field"><label>URL Google Apps Script</label><input type="url" name="api" placeholder="https://script.google.com/macros/s/…/exec"></div>
+      </div>
+
+      <button class="btn" type="submit" id="saveBtn">Simpan Undangan</button>
+      <p class="hint" style="text-align:center;color:var(--muted);font-size:13px">Perubahan langsung tampil di tautan publik setelah disimpan.</p>
+    </form>
+  </div>
+  <script type="module" src="./src/js/dashboard.js"></script>
+</body>
+</html>
