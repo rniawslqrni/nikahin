@@ -4,7 +4,25 @@ import { supabase, isSupabaseConfigured } from "../../lib/supabase.js";
 // Live binding: semua section (home, bride, time, ...) mengimpor {data} dari
 // file ini dan membacanya saat render. initData() dipanggil (await) di main.js
 // sebelum render, sehingga data bisa diganti dengan data milik user dari database.
-export let data = templateData;
+
+// Normalisasi path aset relatif (./src/..., src/...) menjadi absolut (/src/...)
+// agar tetap valid saat halaman dibuka lewat /u/slug (rewrite).
+function normalizeAssetPaths(obj) {
+    if (typeof obj === "string") {
+        if (obj.startsWith("./src/")) return "/" + obj.slice(2);
+        if (obj.startsWith("src/")) return "/" + obj;
+        return obj;
+    }
+    if (Array.isArray(obj)) return obj.map(normalizeAssetPaths);
+    if (obj && typeof obj === "object") {
+        const out = {};
+        for (const k of Object.keys(obj)) out[k] = normalizeAssetPaths(obj[k]);
+        return out;
+    }
+    return obj;
+}
+
+export let data = normalizeAssetPaths(templateData);
 
 function resolveSlug() {
     const q = new URLSearchParams(window.location.search).get("u");
@@ -23,7 +41,7 @@ export async function initData() {
             .eq("slug", slug)
             .eq("is_published", true)
             .maybeSingle();
-        if (!error && inv && inv.data) data = inv.data;
+        if (!error && inv && inv.data) data = normalizeAssetPaths(inv.data);
     } catch (e) {
         console.warn("Gagal memuat data undangan:", e);
     }

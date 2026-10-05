@@ -6,7 +6,7 @@ export const data = {
             child: 'Putra ke lorem',
             father: 'Lorem',
             mother: 'Ipsum',
-            image: './src/assets/images/cowo.png'
+            image: '/src/assets/images/cowo.png'
         },
         P: {
             id: 2,
@@ -14,10 +14,10 @@ export const data = {
             child: 'Putri ke lorem',
             father: 'Lorem',
             mother: 'Ipsum',
-            image: './src/assets/images/cewe.png'
+            image: '/src/assets/images/cewe.png'
         },
 
-        couple: './src/assets/images/couple.png'
+        couple: '/src/assets/images/couple.png'
     },
 
     time: {
@@ -52,23 +52,23 @@ export const data = {
     galeri: [
         {
             id: 1,
-            image: './src/assets/images/1.png'
+            image: '/src/assets/images/1.png'
         },
         {
             id: 2,
-            image: './src/assets/images/2.png'
+            image: '/src/assets/images/2.png'
         },
         {
             id: 3,
-            image: './src/assets/images/3.png'
+            image: '/src/assets/images/3.png'
         },
         {
             id: 4,
-            image: './src/assets/images/4.png'
+            image: '/src/assets/images/4.png'
         },
         {
             id: 5,
-            image: './src/assets/images/5.png'
+            image: '/src/assets/images/5.png'
         }
     ],
 
@@ -76,18 +76,18 @@ export const data = {
         {
             id: 1,
             name: 'Lorem Ipsum',
-            icon: './src/assets/images/bca.png',
+            icon: '/src/assets/images/bca.png',
             rekening: '12345678'
         },
         {
             id: 2,
             name: 'Ipsum Lorem',
-            icon: './src/assets/images/bri.png',
+            icon: '/src/assets/images/bri.png',
             rekening: '12345678'
         },
     ],
 
-    audio: './src/assets/audio/wedding.mp3',
+    audio: '/src/assets/audio/wedding.mp3',
 
     api: 'https://script.google.com/macros/s/AKfycbyydz6N4p2VWUG8zsXeURv6ap9RP8a4eC3x6N3x6qTDjMVr1cIBz9S0NsHw2rWvBOSXGg/exec',
 
